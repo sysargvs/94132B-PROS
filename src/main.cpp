@@ -80,15 +80,20 @@ void autonomous() {
       }
     }
   }
+  drivetrain.chassis.curvature(127, 0);
+  pros::delay(150);
+  drivetrain.chassis.curvature(0, 0);
   elevator.setHeight(330);
+  pros::delay(500);
   claw.setMotion(Claw::Motion::OUTTAKE);
-  pros::delay(1500);
+  pros::delay(1000);
   elevator.setHeight(530);
   pros::delay(500);
   drivetrain.chassis.curvature(-127, 0);
-  pros::delay(500);
-  drivetrain.chassis.curvature(0, -127);
   pros::delay(250);
+  elevator.setHeight(30);
+  drivetrain.chassis.curvature(0, -127);
+  pros::delay(350);
   drivetrain.chassis.curvature(0, 0);
   claw.stop();
   
