@@ -9,6 +9,7 @@ Drivetrain drivetrain;
 Elevator elevator;
 Claw claw;
 
+
 void initialize() {
   pros::lcd::initialize();
   drivetrain.chassis.calibrate();
@@ -30,15 +31,16 @@ void competition_initialize() {}
 
 void autonomous() {
   drivetrain.chassis.setPose(0, 0, 0);
+  drivetrain.chassis.moveToPose(0, 20, 0, 4000);
 }
 
 void opcontrol() {
   while (true) {
     drivetrain.drive(controller);
 
-    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
       elevator.setMotion(Elevator::Motion::UP);
-    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
       elevator.setMotion(Elevator::Motion::DOWN);
     } else {
       elevator.holdCurrentHeight();
