@@ -4,16 +4,12 @@
 
 using namespace claw_constants;
 
-Claw::Claw() : motor(PORT, GEARSET) {
-  motor.set_brake_mode(pros::MotorBrake::hold);
-  motor.set_current_limit(CURRENT_LIMIT);
+Claw::Claw() : motor(PORT, GEARSET) {}
+
+void Claw::setMotion(Motion motion) {
+  motor.move_voltage(motion == Motion::INTAKE ? INTAKE_VOLTAGE : -OUTTAKE_VOLTAGE);
 }
 
-void Claw::setOpen(bool open) {
-  isOpen = open;
-  motor.move_absolute(open ? OPEN_POSITION : CLOSED_POSITION, MOVE_VELOCITY);
-}
-
-void Claw::toggle() {
-  setOpen(!isOpen);
+void Claw::stop() {
+  motor.brake();
 }
