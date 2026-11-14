@@ -11,6 +11,9 @@ Elevator::Elevator() : motors({LEFT_PORT, RIGHT_PORT}, GEARSET) {
 }
 
 void Elevator::setMotion(Motion motion) {
+  if (motors.get_position() < 0 && motion == Motion::DOWN) {
+    return;
+  }
   motors.move_voltage(motion == Motion::UP ? UP_VOLTAGE : -DOWN_VOLTAGE);
 }
 
@@ -24,7 +27,7 @@ double Elevator::getPosition() {
 }
 
 void Elevator::holdCurrentHeight() {
-  motors.brake();
+  motors.move_velocity(0);
 }
 
 void Elevator::waitUntilAtHeight(std::uint32_t timeoutMs) {

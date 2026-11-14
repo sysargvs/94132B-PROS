@@ -109,7 +109,7 @@ void opcontrol() {
 
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
       elevator.setMotion(Elevator::Motion::UP);
-    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && elevator.getPosition() > 0) {
       elevator.setMotion(Elevator::Motion::DOWN);
     } else {
       elevator.holdCurrentHeight();
