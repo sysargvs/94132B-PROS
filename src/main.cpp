@@ -1,4 +1,5 @@
 #include "main.h"
+#include "ui/birthday_ui.hpp"
 #include "pros_pose/pros_pose.hpp"
 
 #include "subsystems/claw/claw.hpp"
@@ -15,23 +16,12 @@ pros::AIVision camera(7);
 ProsPose pose_estimator;
 
 void initialize() {
-  pros::lcd::initialize();
+  birthday_ui::show_on_boot();
   drivetrain.chassis.calibrate();
 
   camera.reset();
   camera.enable_detection_types(pros::AivisionModeType::tags);
   camera.set_tag_family(pros::AivisionTagFamily::tag_21H7);
-
-  pros::Task screenTask([] {
-    while (true) {
-      lemlib::Pose pose = drivetrain.chassis.getPose();
-      pros::lcd::print(0, "X: %.2f", pose.x);
-      pros::lcd::print(1, "Y: %.2f", pose.y);
-      pros::lcd::print(2, "Theta: %.2f", pose.theta);
-      pros::lcd::print(3, "Height: %.2f", elevator.getPosition());
-      pros::delay(50);
-    }
-  });
 }
 
 void disabled() {}
@@ -74,7 +64,7 @@ void autonomous() {
           } else {
             drivetrain.chassis.moveToPose(result.x*39.370079, result.z*39.370079+30, 0, 4000);
             drivetrain.chassis.waitUntilDone();
-            pros::lcd::print(4, "Angles: %.2f %.2f %.2f", result.roll, result.pitch, result.yaw);
+            printf("Angles: %.2f %.2f %.2f\n", result.roll, result.pitch, result.yaw);
           }
         }
       }
