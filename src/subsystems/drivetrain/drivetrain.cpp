@@ -25,8 +25,8 @@ Drivetrain::Drivetrain()
               lemlib::OdomSensors(nullptr, nullptr, &horizontalWheel, nullptr, &imu), &throttleCurve,
               &steerCurve) {}
 
-void Drivetrain::drive(pros::Controller& controller) {
+void Drivetrain::drive(pros::Controller& controller, bool toggled) {
   int throttle = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
   int steer = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-  chassis.curvature(throttle, steer);
+  chassis.curvature((toggled ? -1 : 1) *throttle, steer);
 }

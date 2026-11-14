@@ -6,7 +6,7 @@ class Drivetrain {
  public:
   Drivetrain();
 
-  void drive(pros::Controller& controller);
+  void drive(pros::Controller& controller, bool toggled);
 
  private:
   pros::MotorGroup leftMotors;

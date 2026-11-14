@@ -95,8 +95,12 @@ void autonomous() {
 }
 
 void opcontrol() {
+  bool toggled = false;
   while (true) {
-    drivetrain.drive(controller);
+    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+      toggled = !toggled;
+    }
+    drivetrain.drive(controller, toggled);
 
     if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
       elevator.setMotion(Elevator::Motion::UP);

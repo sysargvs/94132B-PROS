@@ -10,6 +10,7 @@ class Claw {
 
   void setMotion(Motion motion);
   void stop();
+  pros::Motor getMotor();
 
  private:
   pros::Motor motor;

@@ -13,3 +13,7 @@ void Claw::setMotion(Motion motion) {
 void Claw::stop() {
   motor.brake();
 }
+
+pros::Motor Claw::getMotor() {
+  return motor;
+}
