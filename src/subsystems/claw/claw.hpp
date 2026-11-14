@@ -4,12 +4,13 @@
 
 class Claw {
  public:
+  enum class Motion { INTAKE, OUTTAKE };
+
   Claw();
 
-  void setOpen(bool open);
-  void toggle();
+  void setMotion(Motion motion);
+  void stop();
 
  private:
   pros::Motor motor;
-  bool isOpen = true;
 };

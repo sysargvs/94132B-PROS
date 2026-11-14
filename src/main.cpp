@@ -44,8 +44,12 @@ void opcontrol() {
       elevator.holdCurrentHeight();
     }
 
-    if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)) {
-      claw.toggle();
+    if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)) {
+      claw.setMotion(Claw::Motion::INTAKE);
+    } else if (controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
+      claw.setMotion(Claw::Motion::OUTTAKE);
+    } else {
+      claw.stop();
     }
 
     pros::delay(10);
