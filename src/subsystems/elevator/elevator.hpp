@@ -10,6 +10,7 @@ class Elevator {
 
   void setMotion(Motion motion);
   void setHeight(double degrees);
+  double getPosition();
   void holdCurrentHeight();
   void waitUntilAtHeight(std::uint32_t timeoutMs);
 

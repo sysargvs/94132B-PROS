@@ -19,6 +19,10 @@ void Elevator::setHeight(double degrees) {
   motors.move_absolute(degrees, MOVE_VELOCITY);
 }
 
+double Elevator::getPosition() {
+  return motors.get_position();
+}
+
 void Elevator::holdCurrentHeight() {
   motors.brake();
 }

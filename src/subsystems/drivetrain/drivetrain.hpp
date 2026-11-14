@@ -13,7 +13,9 @@ class Drivetrain {
   pros::MotorGroup rightMotors;
   pros::Imu imu;
   pros::Rotation horizontalRotation;
+  pros::Rotation lateralRotation;
   lemlib::TrackingWheel horizontalWheel;
+  lemlib::TrackingWheel lateralWheel;
   lemlib::ExpoDriveCurve throttleCurve;
   lemlib::ExpoDriveCurve steerCurve;
 
